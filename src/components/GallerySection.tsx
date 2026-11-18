@@ -23,14 +23,15 @@ export default function GallerySection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.gallery-tile', {
-        y: 36,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.08,
+        y: 28,
+        duration: 0.65,
+        stagger: 0.06,
         ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: '.gallery-grid',
-          start: 'top 84%',
+          start: 'top 90%',
           once: true,
         },
       });

@@ -24,6 +24,13 @@ const TECH_MARQUEE = [
   'OPEN SOURCE',
 ];
 
+const ROLE_TAGS = [
+  'All 4 Tracks · Swag Kit',
+  'Keynotes · Workshops',
+  'GDG Core · Campus Leads',
+  'Early Alerts · CFP',
+];
+
 export default function AboutAndTracks({ scrollToSection }: AboutAndTracksProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -37,11 +44,11 @@ export default function AboutAndTracks({ scrollToSection }: AboutAndTracksProps)
         const obj = { val: 0 };
         gsap.to(obj, {
           val: target,
-          duration: 1.6,
+          duration: 1.4,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: el,
-            start: 'top 88%',
+            start: 'top 92%',
             once: true,
           },
           onUpdate: () => {
@@ -50,45 +57,45 @@ export default function AboutAndTracks({ scrollToSection }: AboutAndTracksProps)
         });
       });
 
-      // GSAP ScrollTrigger staggered cards for About / Logistics
+      // Subtle transform-only GSAP scroll reveal (never hides content at opacity: 0!)
       gsap.from('.logistics-card', {
-        y: 36,
-        opacity: 0,
-        duration: 0.75,
-        stagger: 0.12,
+        y: 26,
+        duration: 0.65,
+        stagger: 0.1,
         ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: '.logistics-grid',
-          start: 'top 84%',
+          start: 'top 90%',
           once: true,
         },
       });
 
-      // GSAP ScrollTrigger staggered cards for Official Role Badges
       gsap.from('.role-badge-card', {
-        y: 32,
-        opacity: 0,
-        scale: 0.96,
+        y: 26,
+        duration: 0.65,
+        stagger: 0.08,
+        ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: '.role-badges-grid',
+          start: 'top 90%',
+          once: true,
+        },
+      });
+
+      gsap.from('.track-bento-card', {
+        y: 28,
         duration: 0.7,
         stagger: 0.1,
         ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.role-badges-grid',
-          start: 'top 84%',
-          once: true,
-        },
-      });
-
-      // GSAP ScrollTrigger staggered cards for 4 Tracks
-      gsap.from('.track-bento-card', {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.12,
-        ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: '.tracks-bento-grid',
-          start: 'top 82%',
+          start: 'top 90%',
           once: true,
         },
       });
@@ -180,7 +187,8 @@ export default function AboutAndTracks({ scrollToSection }: AboutAndTracksProps)
                   data-target={stat.value}
                   data-suffix={stat.suffix}
                 >
-                  0{stat.suffix}
+                  {stat.value.toLocaleString('en-IN')}
+                  {stat.suffix}
                 </div>
                 <div className="font-display font-bold text-slate-900 text-sm sm:text-base mt-2">
                   {stat.label}
@@ -199,10 +207,14 @@ export default function AboutAndTracks({ scrollToSection }: AboutAndTracksProps)
                 <h3 className="font-display font-bold text-2xl sm:text-3xl text-slate-950 mt-1">
                   Ways to be part of DevFest Prayagraj ’26
                 </h3>
+                <p className="text-sm text-slate-600 mt-1">
+                  Join as an attendee, take the stage as a speaker, volunteer with GDG Prayagraj, or
+                  subscribe for announcements.
+                </p>
               </div>
               <button
                 onClick={() => scrollToSection('badge')}
-                className="self-start sm:self-auto inline-flex items-center gap-1.5 rounded-full bg-slate-950 hover:bg-[#4285F4] text-white px-4 py-2 text-xs font-semibold transition cursor-pointer"
+                className="self-start sm:self-auto inline-flex items-center gap-1.5 rounded-full bg-slate-950 hover:bg-[#4285F4] text-white px-4 py-2 text-xs font-semibold transition cursor-pointer shrink-0"
               >
                 Create Custom Badge
                 <ArrowUpRight className="w-3.5 h-3.5" />
@@ -210,19 +222,31 @@ export default function AboutAndTracks({ scrollToSection }: AboutAndTracksProps)
             </div>
 
             <div className="role-badges-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {OFFICIAL_BADGES.map((b) => (
-                <div
+              {OFFICIAL_BADGES.map((b, idx) => (
+                <motion.div
                   key={b.title}
-                  className="role-badge-card rounded-3xl border border-slate-200/80 bg-[#FAF9F6] hover:bg-white hover:shadow-md transition p-5 flex flex-col items-center text-center"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 24 }}
+                  className="role-badge-card rounded-3xl border border-slate-200/80 bg-[#FAF9F6] hover:bg-white hover:shadow-lg transition p-5 flex flex-col items-center text-center justify-between"
                 >
-                  <img
-                    src={b.image}
-                    alt={`DevFest 2026 ${b.title} Badge`}
-                    className="w-24 h-24 object-contain mb-3"
-                  />
-                  <h4 className="font-display font-bold text-lg text-slate-950">{b.title}</h4>
-                  <p className="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">{b.desc}</p>
-                </div>
+                  <div className="flex flex-col items-center">
+                    <img
+                      src={b.image}
+                      alt={`DevFest 2026 ${b.title} Badge`}
+                      className="w-24 h-24 object-contain mb-3"
+                    />
+                    <span
+                      style={{ backgroundColor: b.bg }}
+                      className="font-mono-dev text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full text-slate-900 mb-2"
+                    >
+                      {ROLE_TAGS[idx]}
+                    </span>
+                    <h4 className="font-display font-bold text-lg text-slate-950">{b.title}</h4>
+                    <p className="text-xs sm:text-sm text-slate-600 mt-1.5 leading-relaxed">
+                      {b.desc}
+                    </p>
+                  </div>
+                </motion.div>
               ))}
             </div>
           </div>

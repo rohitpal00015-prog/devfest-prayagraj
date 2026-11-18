@@ -42,14 +42,15 @@ export default function CommunityAndFooter({
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.partner-card', {
-        y: 28,
-        opacity: 0,
-        duration: 0.65,
-        stagger: 0.07,
+        y: 24,
+        duration: 0.6,
+        stagger: 0.06,
         ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: partnersRef.current,
-          start: 'top 84%',
+          start: 'top 90%',
           once: true,
         },
       });
@@ -269,9 +270,19 @@ export default function CommunityAndFooter({
           </div>
 
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
-            <span>© 2026 GDG Prayagraj · DevFest Prayagraj ’26</span>
+            <span>
+              © 2026 GDG Prayagraj · Designed &amp; Built with ❤️ by{' '}
+              <a
+                href="https://github.com/rohitpal00015-prog"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold text-[#FFE7A5] hover:text-white underline underline-offset-4 transition"
+              >
+                Rohit Pal
+              </a>
+            </span>
             <span className="font-mono-dev text-[11px] text-slate-500">
-              Official DevFest ’26 Brand Assets · GSAP · Motion · Lenis
+              DevFest Prayagraj ’26 · GSAP · Motion · Lenis
             </span>
           </div>
         </div>

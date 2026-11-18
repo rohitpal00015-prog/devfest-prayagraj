@@ -43,13 +43,14 @@ export default function ScheduleSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.schedule-header-anim', {
-        y: 28,
-        opacity: 0,
-        duration: 0.75,
+        y: 24,
+        duration: 0.65,
         ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 84%',
+          start: 'top 90%',
           once: true,
         },
       });

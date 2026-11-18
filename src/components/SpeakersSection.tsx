@@ -15,14 +15,15 @@ export default function SpeakersSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.speaker-card', {
-        y: 32,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.06,
+        y: 26,
+        duration: 0.65,
+        stagger: 0.05,
         ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: '.speakers-grid',
-          start: 'top 84%',
+          start: 'top 90%',
           once: true,
         },
       });

@@ -75,14 +75,15 @@ export default function BadgeStudio() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.badge-studio-anim', {
-        y: 36,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.14,
+        y: 28,
+        duration: 0.7,
+        stagger: 0.12,
         ease: 'power3.out',
+        immediateRender: false,
+        clearProps: 'transform',
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: 'top 80%',
+          start: 'top 90%',
           once: true,
         },
       });

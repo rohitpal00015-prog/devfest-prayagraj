@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+@theme {
+  /* Official Google DevFest 2026 Core Palette */
+  --color-g-blue: #4285F4;
+  --color-g-green: #34A853;
+  --color-g-yellow: #F9AB00;
+  --color-g-red: #EA4335;
+
+  /* Official DevFest Halftones */
+  --color-ht-blue: #57CAFF;
+  --color-ht-green: #5CDB6D;
+  --color-ht-yellow: #FFD427;
+  --color-ht-red: #FF7DAF;
+
+  /* Official DevFest Pastels */
+  --color-pastel-blue: #C3ECF6;
+  --color-pastel-green: #CCF6C5;
+  --color-pastel-yellow: #FFE7A5;
+  --color-pastel-red: #F8D8D8;
+
+  /* Warm Parchment & Midnight Theme */
+  --color-parchment: #FAF9F6;
+  --color-midnight: #0B0F1A;
+  --color-naini: #10172A;
+
+  --font-display: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-hindi: 'Tiro Devanagari Hindi', serif;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+html,
+body {
+  font-family: var(--font-sans);
+  overflow-x: clip;
+  max-width: 100%;
+  background-color: #FAF9F6;
+  color: #111827;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+.font-editorial {
+  font-family: var(--font-serif);
+}
+.font-mono-dev {
+  font-family: var(--font-mono);
+}
+.font-hindi {
+  font-family: var(--font-hindi);
+}
+
+/* Subtle engineering drafting grid */
+.bg-draft-grid {
+  background-image:
+    linear-gradient(to right, rgba(17, 24, 39, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 24, 39, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-draft-grid-dark {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+/* Craft paper dot grid for Polaroid Table */
+.bg-dot-table {
+  background-color: #FFFDF7;
+  background-image: radial-gradient(rgba(202, 138, 4, 0.25) 1.5px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+
+/* Rotating Chromatic Google Conic Border */
+@property --rainbow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-rainbow {
+  to {
+    --rainbow-angle: 360deg;
+  }
+}
+
+.rainbow-border {
+  position: relative;
+  background: conic-gradient(
+    from var(--rainbow-angle),
+    #4285F4 0deg,
+    #34A853 90deg,
+    #F9AB00 180deg,
+    #EA4335 270deg,
+    #4285F4 360deg
+  );
+  animation: spin-rainbow 5s linear infinite;
+}
+
+/* Google 4-color signature bar */
+.google-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 4px;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+/* Kinetic Marquee */
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 34s linear infinite;
+}
+
+.marquee-wrapper:hover .animate-marquee-left {
+  animation-play-state: paused;
+}
+
+/* River Ripple */
+@keyframes ripple-wave {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: ripple-wave 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Holographic badge sheen */
+.holo-sheen {
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.24) 38%,
+    rgba(87, 202, 255, 0.26) 46%,
+    rgba(255, 212, 39, 0.24) 54%,
+    rgba(255, 125, 175, 0.2) 62%,
+    transparent 80%
+  );
+  background-size: 250% 250%;
+  animation: holo-shift 6s ease-in-out infinite;
+}
+
+@keyframes holo-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
